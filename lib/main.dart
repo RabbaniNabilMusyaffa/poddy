@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
             child: Container(child: Image.asset('lib/assets/abs046.png')),
           ),
           duration: 3000,
-          splashTransition: SplashTransition.rotationTransition,
+          splashTransition: SplashTransition.fadeTransition,
           nextScreen: PomodorTimer()),
     );
   }
