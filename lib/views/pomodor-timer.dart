@@ -166,7 +166,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'FE - Inspector / Sertifikat',
+                    'Tugas PBO / Project Portofolio',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -232,7 +232,18 @@ class _PomodorTimerState extends State<PomodorTimer>
                     width: 20), // Add a gap of 20 units between the buttons
                 GestureDetector(
                   onTap: () {
-                    // ...
+                    if (controller.isAnimating) {
+                      controller.stop();
+                      setState(() {
+                        isPlaying = false;
+                      });
+                    } else {
+                      controller.reverse(
+                          from: controller.value == 0 ? 1.0 : controller.value);
+                      setState(() {
+                        isPlaying = true;
+                      });
+                    }
                   },
                   child: RoundButton(
                     icon: isPlaying == true
@@ -244,7 +255,10 @@ class _PomodorTimerState extends State<PomodorTimer>
                 SizedBox(width: 20), // Add another gap of 20 units
                 GestureDetector(
                   onTap: () {
-                    // ...
+                    controller.reset();
+                    setState(() {
+                      isPlaying = false;
+                    });
                   },
                   child: RoundButton(
                     icon: Icons.stop_rounded,
