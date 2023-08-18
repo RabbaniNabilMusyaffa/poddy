@@ -68,7 +68,7 @@ class _PomodorTimerState extends State<PomodorTimer>
         backgroundColor: '#181922'.toColor(),
         elevation: 0.0,
         title: Container(
-          width: 315,
+          width: 310,
           height: 37,
           padding: const EdgeInsets.all(10),
           clipBehavior: Clip.antiAlias,
