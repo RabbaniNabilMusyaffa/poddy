@@ -67,6 +67,7 @@ class _PomodorTimerState extends State<PomodorTimer>
       appBar: AppBar(
         backgroundColor: '#181922'.toColor(),
         elevation: 0.0,
+<<<<<<< HEAD
         title: Container(
           width: 315,
           height: 37,
@@ -137,6 +138,16 @@ class _PomodorTimerState extends State<PomodorTimer>
               const SizedBox(width: 10),
               Container(width: 10, height: 10),
             ],
+=======
+        title: const Center(
+          child: Text(
+            'Poddy',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
+            ),
+>>>>>>> poddy/main
           ),
         ),
       ),
@@ -146,6 +157,7 @@ class _PomodorTimerState extends State<PomodorTimer>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+<<<<<<< HEAD
             Container(
               width: 370,
               height: 120,
@@ -233,6 +245,78 @@ class _PomodorTimerState extends State<PomodorTimer>
                 GestureDetector(
                   onTap: () {
                     // ...
+=======
+            Center(
+              child: Text(
+                'Current Task',
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.4),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(17.0),
+              child: const Text(
+                'Tugas PBO',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            const Spacer(),
+            GestureDetector(
+              onTap: () {
+                if (controller.isDismissed) {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) => Container(
+                          height: 300,
+                          child: CupertinoTimerPicker(
+                            initialTimerDuration: controller.duration!,
+                            onTimerDurationChanged: (time) {
+                              setState(() {
+                                controller.duration = time;
+                              });
+                            },
+                          )));
+                }
+              },
+              child: AnimatedBuilder(
+                  animation: controller,
+                  builder: (context, child) => Text(countText,
+                      style: TextStyle(
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white))),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Center the buttons horizontally
+              children: [
+                RoundButton(
+                  icon: Icons.fast_rewind_rounded,
+                  buttonColor: Colors.white, // Set the button color to white
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (controller.isAnimating) {
+                      controller.stop();
+                      setState(() {
+                        isPlaying = false;
+                      });
+                    } else {
+                      controller.reverse(
+                          from: controller.value == 0 ? 1.0 : controller.value);
+                      setState(() {
+                        isPlaying = true;
+                      });
+                    }
+>>>>>>> poddy/main
                   },
                   child: RoundButton(
                     icon: isPlaying == true
@@ -241,6 +325,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                     buttonColor: Colors.white,
                   ),
                 ),
+<<<<<<< HEAD
                 SizedBox(width: 20), // Add another gap of 20 units
                 GestureDetector(
                   onTap: () {
@@ -249,12 +334,28 @@ class _PomodorTimerState extends State<PomodorTimer>
                   child: RoundButton(
                     icon: Icons.stop_rounded,
                     buttonColor: const Color.fromARGB(255, 131, 131, 131),
+=======
+                GestureDetector(
+                  onTap: () {
+                    controller.reset();
+                    setState(() {
+                      isPlaying = false;
+                    });
+                  },
+                  child: RoundButton(
+                    icon: Icons.stop_rounded,
+                    buttonColor: Colors.white,
+>>>>>>> poddy/main
                   ),
                 ),
               ],
             ),
             SizedBox(
+<<<<<<< HEAD
               height: MediaQuery.of(context).size.height / 10,
+=======
+              height: MediaQuery.of(context).size.height / 6,
+>>>>>>> poddy/main
             )
           ],
         ),
