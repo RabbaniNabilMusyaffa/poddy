@@ -62,6 +62,7 @@ flutter:
     - lib/assets/archive-add.png
     - lib/assets/calendar-2.png
     - lib/assets/setting.png
+    - lib/assets/google.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
