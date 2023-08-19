@@ -83,12 +83,6 @@ class _PomodorTimerState extends State<PomodorTimer>
               //   width: 24, // Customize the width of the icon
               //   height: 24, // Customize the height of the icon
               // ),
-              Icon(
-                Icons.arrow_back, // Replace with the desired icon
-                color: const Color.fromARGB(
-                    255, 255, 255, 255), // Replace with the desired color
-                size: 28.0, // Replace with the desired size
-              ),
 
               Transform(
                 transform: Matrix4.identity()
@@ -105,7 +99,14 @@ class _PomodorTimerState extends State<PomodorTimer>
                       Container(
                         width: 16,
                         height: 16,
-                        child: Stack(children: []),
+                        child: Stack(children: [
+                          Icon(
+                            Icons.arrow_back, // Replace with the desired icon
+                            color: const Color.fromARGB(255, 255, 255,
+                                255), // Replace with the desired color
+                            size: 28.0, // Replace with the desired size
+                          ),
+                        ]),
                       ),
                     ],
                   ),

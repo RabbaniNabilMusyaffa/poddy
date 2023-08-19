@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:poddy_proto/views/home.dart';
 import 'package:poddy_proto/views/pomodor-timer.dart';
 import 'package:poddy_proto/views/splash_screen.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           ),
           duration: 3000,
           splashTransition: SplashTransition.fadeTransition,
-          nextScreen: PomodorTimer()),
+          nextScreen: Home()),
     );
   }
 }

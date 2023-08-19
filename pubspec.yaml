@@ -55,7 +55,13 @@ dev_dependencies:
 flutter:
   assets:
     - lib/assets/sidebar-left.png
+    - lib/assets/sidebar-left-stroke.png
     - lib/assets/abs046.png
+    - lib/assets/voice-square.png
+    - lib/assets/archive.png
+    - lib/assets/archive-add.png
+    - lib/assets/calendar-2.png
+    - lib/assets/setting.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
