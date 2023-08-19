@@ -69,7 +69,7 @@ class _PomodorTimerState extends State<PomodorTimer>
         elevation: 0.0,
         title: Container(
           width: 310,
-          height: 37,
+          height: 40,
           padding: const EdgeInsets.all(10),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(),
@@ -78,11 +78,18 @@ class _PomodorTimerState extends State<PomodorTimer>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                'lib/assets/sidebar-left.png', // Replace with the actual path to your custom icon image
-                width: 24, // Customize the width of the icon
-                height: 24, // Customize the height of the icon
+              // Image.asset(
+              //   'lib/assets/sidebar-left.png', // Replace with the actual path to your custom icon image
+              //   width: 24, // Customize the width of the icon
+              //   height: 24, // Customize the height of the icon
+              // ),
+              Icon(
+                Icons.arrow_back, // Replace with the desired icon
+                color: const Color.fromARGB(
+                    255, 255, 255, 255), // Replace with the desired color
+                size: 28.0, // Replace with the desired size
               ),
+
               Transform(
                 transform: Matrix4.identity()
                   ..translate(0.0, 0.0)
@@ -106,11 +113,11 @@ class _PomodorTimerState extends State<PomodorTimer>
               ),
               const SizedBox(width: 10),
               Container(
-                width: 100,
+                width: 130,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'Poddy',
@@ -148,7 +155,7 @@ class _PomodorTimerState extends State<PomodorTimer>
           children: <Widget>[
             Container(
               width: 370,
-              height: 120,
+              height: 110,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 30),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -169,7 +176,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                     'Tugas PBO / Project Portofolio',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
                     ),

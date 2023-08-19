@@ -16,11 +16,11 @@ class RoundButton extends StatelessWidget {
         horizontal: 5,
       ),
       child: CircleAvatar(
-        radius: 30,
+        radius: 35,
         backgroundColor: buttonColor, // Set the background color
         child: Icon(
           icon,
-          size: 36,
+          size: 50,
           color: Colors.black, // You can customize the icon color here
         ),
       ),
