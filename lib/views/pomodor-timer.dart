@@ -11,11 +11,15 @@ class PomodorTimer extends StatefulWidget {
   _PomodorTimerState createState() => _PomodorTimerState();
 }
 
+typedef TimerCompleteCallback = void Function();
+
 class _PomodorTimerState extends State<PomodorTimer>
     with TickerProviderStateMixin {
   late AnimationController controller;
 
   bool isPlaying = false;
+
+  bool isMainTimer = true;
 
   String get countText {
     Duration count = controller.duration! * controller.value;
@@ -28,15 +32,9 @@ class _PomodorTimerState extends State<PomodorTimer>
 
   final Duration initialDuration = Duration(minutes: 25);
 
-  bool hasTimerReset = false;
+  final Duration breakDuration = Duration(seconds: 5);
 
-  void resetToInitialDuration() {
-    controller.reset();
-    setState(() {
-      controller.duration = initialDuration;
-      isPlaying = false;
-    });
-  }
+  Duration userInputtedDuration = Duration.zero;
 
   void resetTimerDuration(Duration newDuration) {
     controller.reset();
@@ -48,11 +46,24 @@ class _PomodorTimerState extends State<PomodorTimer>
   void notify() {
     if (countText == '00:00') {
       FlutterRingtonePlayer.playNotification();
-      resetTimerDuration(Duration(seconds: 5));
-      controller.reverse(from: 1.0);
+      controller.reset();
       setState(() {
-        isPlaying = true;
+        isPlaying = false;
       });
+
+      if (isMainTimer) {
+        // Switch to the break timer
+        resetTimerDuration(breakDuration);
+        isMainTimer = false;
+        controller.reverse(from: 1.0);
+        setState(() {
+          isPlaying = true;
+        });
+      } else {
+        // Reset the break timer to the user-inputted value
+        resetTimerDuration(userInputtedDuration);
+        isMainTimer = true;
+      }
     }
   }
 
@@ -102,18 +113,9 @@ class _PomodorTimerState extends State<PomodorTimer>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: 20,
-                height: 40,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                ),
-              ),
               const SizedBox(width: 10),
               Container(
-                width: 130,
+                width: 150,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -218,6 +220,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                               initialTimerDuration: controller.duration!,
                               onTimerDurationChanged: (time) {
                                 setState(() {
+                                  userInputtedDuration = time;
                                   controller.duration = time;
                                 });
                               },
@@ -261,16 +264,17 @@ class _PomodorTimerState extends State<PomodorTimer>
                   onTap: () {
                     if (controller.isAnimating) {
                       controller.stop();
-                      setState(() {
-                        isPlaying = false;
-                      });
                     } else {
-                      controller.reverse(
-                          from: controller.value == 0 ? 1.0 : controller.value);
-                      setState(() {
-                        isPlaying = true;
-                      });
+                      if (isMainTimer) {
+                        // Start the main timer countdown
+                        controller.reverse(
+                            from:
+                                controller.value == 0 ? 1.0 : controller.value);
+                      }
                     }
+                    setState(() {
+                      isPlaying = !isPlaying;
+                    });
                   },
                   child: RoundButton(
                     icon: isPlaying == true
@@ -282,7 +286,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                 SizedBox(width: 20), // Add another gap of 20 units
                 GestureDetector(
                   onTap: () {
-                    resetToInitialDuration();
+                    resetTimerDuration(userInputtedDuration);
                     isPlaying = false;
                   },
                   child: RoundButton(

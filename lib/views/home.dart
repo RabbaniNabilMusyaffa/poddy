@@ -10,6 +10,7 @@ class Home extends StatelessWidget {
       backgroundColor: Color.fromARGB(255, 24, 25, 34),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 24, 25, 34),
+        elevation: 0.0,
         title: Container(
           width: 370,
           height: 37,
@@ -156,7 +157,7 @@ class Home extends StatelessWidget {
                                               height: 16,
                                               child: Stack(children: [
                                                 Image.asset(
-                                                    'lib/assets/archive.png'),
+                                                    'lib/assets/archive-add.png'),
                                               ]),
                                             ),
                                           ],
