@@ -434,6 +434,22 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) =>
+          //      // Replace NewPage with your actual page widget
+          //   ),
+          // );
+        },
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        child: Icon(
+          Icons.add_rounded,
+          color: Color.fromARGB(255, 24, 25, 34),
+        ),
+      ),
     );
   }
 }

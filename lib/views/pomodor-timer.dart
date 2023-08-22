@@ -32,7 +32,7 @@ class _PomodorTimerState extends State<PomodorTimer>
 
   final Duration initialDuration = Duration(minutes: 25);
 
-  final Duration breakDuration = Duration(seconds: 5);
+  final Duration breakDuration = Duration(minutes: 5);
 
   Duration userInputtedDuration = Duration.zero;
 
@@ -217,6 +217,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                         builder: (context) => Container(
                             height: 300,
                             child: CupertinoTimerPicker(
+                              mode: CupertinoTimerPickerMode.ms,
                               initialTimerDuration: controller.duration!,
                               onTimerDurationChanged: (time) {
                                 setState(() {
@@ -286,7 +287,11 @@ class _PomodorTimerState extends State<PomodorTimer>
                 SizedBox(width: 20), // Add another gap of 20 units
                 GestureDetector(
                   onTap: () {
-                    resetTimerDuration(userInputtedDuration);
+                    if (userInputtedDuration == Duration.zero) {
+                      resetTimerDuration(initialDuration);
+                    } else {
+                      resetTimerDuration(userInputtedDuration);
+                    }
                     isPlaying = false;
                   },
                   child: RoundButton(
