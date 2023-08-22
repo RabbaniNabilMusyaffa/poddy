@@ -26,9 +26,33 @@ class _PomodorTimerState extends State<PomodorTimer>
 
   double progress = 1.0;
 
+  final Duration initialDuration = Duration(minutes: 25);
+
+  bool hasTimerReset = false;
+
+  void resetToInitialDuration() {
+    controller.reset();
+    setState(() {
+      controller.duration = initialDuration;
+      isPlaying = false;
+    });
+  }
+
+  void resetTimerDuration(Duration newDuration) {
+    controller.reset();
+    setState(() {
+      controller.duration = newDuration;
+    });
+  }
+
   void notify() {
-    if (countText == '0:00:00') {
+    if (countText == '00:00') {
       FlutterRingtonePlayer.playNotification();
+      resetTimerDuration(Duration(seconds: 5));
+      controller.reverse(from: 1.0);
+      setState(() {
+        isPlaying = true;
+      });
     }
   }
 
@@ -37,7 +61,7 @@ class _PomodorTimerState extends State<PomodorTimer>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 60),
+      duration: initialDuration,
     );
 
     controller.addListener(() {
@@ -68,9 +92,9 @@ class _PomodorTimerState extends State<PomodorTimer>
         backgroundColor: '#181922'.toColor(),
         elevation: 0.0,
         title: Container(
-          width: 310,
-          height: 40,
-          padding: const EdgeInsets.all(10),
+          width: 370,
+          height: 37,
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(),
           child: Row(
@@ -78,38 +102,13 @@ class _PomodorTimerState extends State<PomodorTimer>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Image.asset(
-              //   'lib/assets/sidebar-left.png', // Replace with the actual path to your custom icon image
-              //   width: 24, // Customize the width of the icon
-              //   height: 24, // Customize the height of the icon
-              // ),
-
-              Transform(
-                transform: Matrix4.identity()
-                  ..translate(0.0, 0.0)
-                  ..rotateZ(-3.14),
-                child: Container(
-                  width: 16,
-                  height: 16,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 16,
-                        height: 16,
-                        child: Stack(children: [
-                          Icon(
-                            Icons.arrow_back, // Replace with the desired icon
-                            color: const Color.fromARGB(255, 255, 255,
-                                255), // Replace with the desired color
-                            size: 28.0, // Replace with the desired size
-                          ),
-                        ]),
-                      ),
-                    ],
-                  ),
+              Container(
+                width: 20,
+                height: 40,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                 ),
               ),
               const SizedBox(width: 10),
@@ -143,7 +142,27 @@ class _PomodorTimerState extends State<PomodorTimer>
                 ),
               ),
               const SizedBox(width: 10),
-              Container(width: 10, height: 10),
+              Container(
+                width: 20,
+                height: 40,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 16,
+                      height: 16,
+                      child: Stack(children: [
+                        Icon(
+                          Icons.settings_rounded,
+                          size: 18,
+                        ),
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -174,7 +193,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Tugas PBO / Project Portofolio',
+                    'Presentasi Poddy',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -263,10 +282,8 @@ class _PomodorTimerState extends State<PomodorTimer>
                 SizedBox(width: 20), // Add another gap of 20 units
                 GestureDetector(
                   onTap: () {
-                    controller.reset();
-                    setState(() {
-                      isPlaying = false;
-                    });
+                    resetToInitialDuration();
+                    isPlaying = false;
                   },
                   child: RoundButton(
                     icon: Icons.stop_rounded,
