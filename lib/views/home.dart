@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poddy_proto/views/create-timer.dart';
 import 'package:poddy_proto/views/pomodor-timer.dart';
 
 class Home extends StatelessWidget {
@@ -436,13 +437,14 @@ class Home extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) =>
-          //      // Replace NewPage with your actual page widget
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  // Replace NewPage with your actual page widget
+                  CreateTimer(),
+            ),
+          );
         },
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         child: Icon(
