@@ -130,25 +130,44 @@ class CreateTimer extends StatelessWidget {
               ),
             ),
 
-            // clock wheel
+            Padding(padding: EdgeInsets.only(top: 20)),
             Container(
-              height: 400, // Adjust the height as needed
+              child: Center(
+                child: Text(
+                  'Main Time',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: 'inter',
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            // Main clock wheel
+            Padding(padding: EdgeInsets.only(top: 30)),
+            Container(
+              height: 200, // Adjust the height as needed
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // hours wheel
                   Container(
-                    width: 70,
+                    width: 80,
                     child: ListWheelScrollView.useDelegate(
-                      onSelectedItemChanged: (value) => print(value),
+                      controller: FixedExtentScrollController(
+                          initialItem: 5000), // Adjust the initial offset
+                      onSelectedItemChanged: (value) {
+                        int normalizedIndex = value % 13;
+                        print(normalizedIndex);
+                      },
                       itemExtent: 50,
                       physics: FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
-                        childCount: 13,
+                        childCount:
+                            100000, // Use a large number to simulate looping
                         builder: (context, index) {
-                          return MyHours(
-                            hours: index,
-                          );
+                          int normalizedIndex = index % 13;
+                          return MyHours(hours: normalizedIndex);
                         },
                       ),
                     ),
@@ -175,21 +194,114 @@ class CreateTimer extends StatelessWidget {
 
                   //Minutes wheel
                   Container(
-                    width: 70,
+                    width: 80,
                     child: ListWheelScrollView.useDelegate(
-                      onSelectedItemChanged: (value) => print(value),
+                      controller: FixedExtentScrollController(
+                          initialItem: 300), // Set an initial offset
+                      onSelectedItemChanged: (value) {
+                        int normalizedIndex = value % 60;
+                        print(normalizedIndex);
+                      },
                       itemExtent: 50,
                       physics: FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
-                        childCount: 60,
+                        childCount:
+                            100000, // Use a large number to simulate looping
                         builder: (context, index) {
-                          return MyMinutes(
-                            mins: index,
-                          );
+                          int normalizedIndex = index % 60;
+                          return MyMinutes(mins: normalizedIndex);
                         },
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+
+            Padding(padding: EdgeInsets.only(top: 50)),
+            Container(
+              child: Center(
+                child: Text(
+                  'Break Time',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: 'inter',
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+
+            Padding(padding: EdgeInsets.only(top: 30)),
+            Container(
+              height: 200, // Adjust the height as needed
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // hours wheel
+                  Container(
+                    width: 80,
+                    child: ListWheelScrollView.useDelegate(
+                      controller: FixedExtentScrollController(
+                          initialItem: 5000), // Adjust the initial offset
+                      onSelectedItemChanged: (value) {
+                        int normalizedIndex = value % 13;
+                        print(normalizedIndex);
+                      },
+                      itemExtent: 50,
+                      physics: FixedExtentScrollPhysics(),
+                      childDelegate: ListWheelChildBuilderDelegate(
+                        childCount:
+                            100000, // Use a large number to simulate looping
+                        builder: (context, index) {
+                          int normalizedIndex = index % 13;
+                          return MyHours(hours: normalizedIndex);
+                        },
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 50,
+                    child: Center(
+                      child: Text(
+                        ':',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+
+                  //Minutes wheel
+                  Container(
+                    width: 80,
+                    child: ListWheelScrollView.useDelegate(
+                      controller: FixedExtentScrollController(
+                          initialItem: 300), // Set an initial offset
+                      onSelectedItemChanged: (value) {
+                        int normalizedIndex = value % 60;
+                        print(normalizedIndex);
+                      },
+                      itemExtent: 50,
+                      physics: FixedExtentScrollPhysics(),
+                      childDelegate: ListWheelChildBuilderDelegate(
+                        childCount:
+                            100000, // Use a large number to simulate looping
+                        builder: (context, index) {
+                          int normalizedIndex = index % 60;
+                          return MyMinutes(mins: normalizedIndex);
+                        },
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

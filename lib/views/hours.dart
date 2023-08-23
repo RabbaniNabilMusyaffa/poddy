@@ -9,7 +9,7 @@ class MyHours extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: 5.0,
+        vertical: 1.0,
       ),
       child: Container(
         child: Center(
@@ -17,7 +17,7 @@ class MyHours extends StatelessWidget {
             hours.toString(),
             style: TextStyle(
                 color: Colors.white,
-                fontSize: 40,
+                fontSize: 45,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'inter'),
           ),

@@ -35,7 +35,10 @@ class Home extends StatelessWidget {
                       width: 16,
                       height: 16,
                       child: Stack(children: [
-                        Image.asset('lib/assets/sidebar-left-stroke.png'),
+                        Icon(
+                          Icons.table_rows_rounded,
+                          size: 18,
+                        ),
                       ]),
                     ),
                   ],
@@ -84,7 +87,10 @@ class Home extends StatelessWidget {
                       width: 16,
                       height: 16,
                       child: Stack(children: [
-                        Image.asset('lib/assets/setting.png'),
+                        Icon(
+                          Icons.settings_rounded,
+                          size: 18,
+                        ),
                       ]),
                     ),
                   ],
