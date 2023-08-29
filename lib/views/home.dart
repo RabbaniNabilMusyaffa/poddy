@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poddy_proto/views/create-timer.dart';
+import 'package:poddy_proto/views/number_page.dart';
 import 'package:poddy_proto/views/pomodor-timer.dart';
 
 class Home extends StatelessWidget {
@@ -13,9 +13,9 @@ class Home extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 24, 25, 34),
         elevation: 0.0,
         title: Container(
-          width: 370,
+          width: 380,
           height: 37,
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 4),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(),
           child: Row(
@@ -251,7 +251,7 @@ class Home extends StatelessWidget {
                                             'Presentasi Poddy',
                                             style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 14,
+                                              fontSize: 16,
                                               fontFamily: 'Inter',
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -448,7 +448,7 @@ class Home extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) =>
                   // Replace NewPage with your actual page widget
-                  CreateTimer(),
+                  NumberPage(),
             ),
           );
         },
