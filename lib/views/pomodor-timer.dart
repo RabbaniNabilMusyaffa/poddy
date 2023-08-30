@@ -1,11 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:poddy_proto/extensions.dart';
+import 'package:poddy_proto/timer_settings.dart';
+import 'package:poddy_proto/views/home.dart';
+import 'package:poddy_proto/views/number_page.dart';
 import '../widgets/round-button.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
 class PomodorTimer extends StatefulWidget {
-  const PomodorTimer({Key? key}) : super(key: key);
+  final String timerTitle;
+  final TimerSettings timerSettings;
+
+  const PomodorTimer({
+    Key? key,
+    required this.timerTitle,
+    required this.timerSettings,
+  }) : super(key: key);
 
   @override
   _PomodorTimerState createState() => _PomodorTimerState();
@@ -195,7 +205,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Presentasi Poddy',
+                    '${widget.timerTitle}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -255,9 +265,30 @@ class _PomodorTimerState extends State<PomodorTimer>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RoundButton(
-                  icon: Icons.fast_rewind_rounded,
-                  buttonColor: const Color.fromARGB(255, 131, 131, 131),
+                GestureDetector(
+                  child: RoundButton(
+                    icon: Icons.home_rounded,
+                    buttonColor: const Color.fromARGB(255, 131, 131, 131),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            // Replace NewPage with your actual page widget
+                            Home(
+                          timerTitle:
+                              "Presentasi Poddy", // Provide a default value
+                          timerSettings: TimerSettings(
+                            mainMinute: 0,
+                            mainSecond: 0,
+                            breakMinute: 0,
+                            breakSecond: 0,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(
                     width: 20), // Add a gap of 20 units between the buttons

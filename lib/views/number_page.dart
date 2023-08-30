@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:poddy_proto/timer_settings.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:poddy_proto/views/pomodor-timer.dart';
 
@@ -18,6 +18,12 @@ class _NumberPageState extends State<NumberPage> {
   int breakSecond = 0;
   var timeFormat = "Main";
 
+  TimerSettings get timerSettings => TimerSettings(
+        mainMinute: mainMinute,
+        mainSecond: mainSecond,
+        breakMinute: breakMinute,
+        breakSecond: breakSecond,
+      );
   String timerTitle = ""; // Variable to store the entered title
 
   @override
@@ -125,7 +131,7 @@ class _NumberPageState extends State<NumberPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                        "Pick Your Time! ${(timeFormat == "Main" ? mainMinute : breakMinute).toString().padLeft(2, '0')}:${(timeFormat == "Main" ? mainSecond : breakSecond).toString().padLeft(2, "0")} for $timeFormat",
+                        "Silahkan atur timer anda ${(timeFormat == "Main" ? mainMinute : breakMinute).toString().padLeft(2, '0')}:${(timeFormat == "Main" ? mainSecond : breakSecond).toString().padLeft(2, "0")} untuk timer $timeFormat",
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
@@ -274,8 +280,10 @@ class _NumberPageState extends State<NumberPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      PomodorTimer(), // Replace NewPage with your actual page widget
+                  builder: (context) => PomodorTimer(
+                      timerTitle: timerTitle,
+                      timerSettings:
+                          timerSettings), // Replace NewPage with your actual page widget
                 ),
               );
             },

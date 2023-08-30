@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poddy_proto/timer_settings.dart';
 import 'package:poddy_proto/views/pomodor-timer.dart';
 
 class Splash extends StatefulWidget {
@@ -18,7 +19,19 @@ class _SplashState extends State<Splash> {
   _navigatetohome() async {
     await Future.delayed(Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => PomodorTimer()));
+      context,
+      MaterialPageRoute(
+        builder: (context) => PomodorTimer(
+          timerTitle: "Presentasi Poddy", // Provide a default value
+          timerSettings: TimerSettings(
+            mainMinute: 25,
+            mainSecond: 00,
+            breakMinute: 5,
+            breakSecond: 00,
+          ), // Provide default settings
+        ),
+      ),
+    );
   }
 
   @override
