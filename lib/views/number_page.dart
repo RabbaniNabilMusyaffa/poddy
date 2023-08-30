@@ -82,7 +82,7 @@ class _NumberPageState extends State<NumberPage> {
               children: [
                 Container(
                   width: 362,
-                  height: 43,
+                  height: 55,
                   padding: const EdgeInsets.all(10),
                   clipBehavior: Clip.antiAlias,
                   decoration: ShapeDecoration(
@@ -94,16 +94,17 @@ class _NumberPageState extends State<NumberPage> {
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: TextField(
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 16,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.none,
                           ),
                           onChanged: (value) {
                             setState(() {
@@ -111,15 +112,16 @@ class _NumberPageState extends State<NumberPage> {
                             });
                           },
                           decoration: InputDecoration(
-                              hintText:
-                                  'Masukkan judul timer', // Placeholder text
-                              hintStyle: TextStyle(
+                            hintText:
+                                'Masukkan judul timer', // Placeholder text
+                            hintStyle: TextStyle(
                                 color: Colors.white.withOpacity(0.5),
-                                fontSize: 12,
+                                fontSize: 16,
                                 fontFamily: 'Inter',
                                 fontWeight: FontWeight.w600,
-                              ),
-                              border: InputBorder.none),
+                                decoration: TextDecoration.none),
+                            border: InputBorder.none,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -134,15 +136,14 @@ class _NumberPageState extends State<NumberPage> {
                         "Silahkan atur timer anda ${(timeFormat == "Main" ? mainMinute : breakMinute).toString().padLeft(2, '0')}:${(timeFormat == "Main" ? mainSecond : breakSecond).toString().padLeft(2, "0")} untuk timer $timeFormat",
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                            fontSize: 12,
                             color: Colors.white,
                             fontFamily: 'Inter')),
                     const SizedBox(
                       height: 20,
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10)),
                       child: Row(
@@ -220,6 +221,7 @@ class _NumberPageState extends State<NumberPage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 10),
                                   decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
                                       color: timeFormat == "Main"
                                           ? Color.fromARGB(255, 1, 94, 170)
                                           : Colors.blue,
@@ -248,6 +250,7 @@ class _NumberPageState extends State<NumberPage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 10),
                                   decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
                                     color: timeFormat == "Break"
                                         ? Color.fromARGB(255, 1, 94, 170)
                                         : Colors.blue,

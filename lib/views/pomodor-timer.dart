@@ -198,7 +198,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                     'CURRENT TASK',
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.75),
-                      fontSize: 14,
+                      fontSize: 12,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
                     ),
@@ -208,9 +208,9 @@ class _PomodorTimerState extends State<PomodorTimer>
                     '${widget.timerTitle}',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
+                      fontFamily: 'inter',
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ],
@@ -218,50 +218,68 @@ class _PomodorTimerState extends State<PomodorTimer>
             ),
 
             // Timer
-            const Spacer(),
-            GestureDetector(
-                onTap: () {
-                  if (controller.isDismissed) {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (context) => Container(
+            Padding(padding: EdgeInsets.only(top: 50)),
+            Container(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    width: 300,
+                    height: 300,
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.grey.shade300,
+                      value: progress,
+                      strokeWidth: 6,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      if (controller.isDismissed) {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => Container(
                             height: 300,
                             child: CupertinoTimerPicker(
-                              mode: CupertinoTimerPickerMode.ms,
                               initialTimerDuration: controller.duration!,
                               onTimerDurationChanged: (time) {
                                 setState(() {
-                                  userInputtedDuration = time;
                                   controller.duration = time;
                                 });
                               },
-                            )));
-                  }
-                },
-                child: Column(
-                  children: [
-                    AnimatedBuilder(
-                        animation: controller,
-                        builder: (context, child) => Text(countText,
-                            style: TextStyle(
-                                fontSize: 70,
-                                fontFamily: 'inter',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
-                    Text(
-                      '6 of 10 session',
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    child: AnimatedBuilder(
+                      animation: controller,
+                      builder: (context, child) => Text(
+                        countText,
+                        style: TextStyle(
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 100),
+                    child: Text(
+                      'session',
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.75),
                         fontSize: 20,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w500,
                       ),
-                    )
-                  ],
-                )),
-            const Spacer(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             // Controller
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
