@@ -1,4 +1,0 @@
-#Wed Aug 30 18:55:43 WIB 2023
-base.0=C\:\\Users\\Rafly\\poddy\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

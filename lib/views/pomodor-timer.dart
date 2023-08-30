@@ -27,6 +27,12 @@ class _PomodorTimerState extends State<PomodorTimer>
     with TickerProviderStateMixin {
   late AnimationController controller;
 
+  int mainMinuteValue = 0;
+  int mainSecondValue = 0;
+  int breakMinuteValue = 0;
+  int breakSecondValue = 0;
+  String timeFormat = "Main";
+
   bool isPlaying = false;
 
   bool isMainTimer = true;
@@ -39,10 +45,6 @@ class _PomodorTimerState extends State<PomodorTimer>
   }
 
   double progress = 1.0;
-
-  final Duration initialDuration = Duration(minutes: 25);
-
-  final Duration breakDuration = Duration(minutes: 5);
 
   Duration userInputtedDuration = Duration.zero;
 
@@ -63,7 +65,10 @@ class _PomodorTimerState extends State<PomodorTimer>
 
       if (isMainTimer) {
         // Switch to the break timer
-        resetTimerDuration(breakDuration);
+        resetTimerDuration(Duration(
+          minutes: widget.timerSettings.breakMinute,
+          seconds: widget.timerSettings.breakSecond,
+        ));
         isMainTimer = false;
         controller.reverse(from: 1.0);
         setState(() {
@@ -71,7 +76,10 @@ class _PomodorTimerState extends State<PomodorTimer>
         });
       } else {
         // Reset the break timer to the user-inputted value
-        resetTimerDuration(userInputtedDuration);
+        resetTimerDuration(Duration(
+          minutes: widget.timerSettings.mainMinute,
+          seconds: widget.timerSettings.mainSecond,
+        ));
         isMainTimer = true;
       }
     }
@@ -82,7 +90,10 @@ class _PomodorTimerState extends State<PomodorTimer>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: initialDuration,
+      duration: Duration(
+        minutes: widget.timerSettings.mainMinute,
+        seconds: widget.timerSettings.mainSecond,
+      ),
     );
 
     controller.addListener(() {
@@ -240,9 +251,30 @@ class _PomodorTimerState extends State<PomodorTimer>
                           builder: (context) => Container(
                             height: 300,
                             child: CupertinoTimerPicker(
-                              initialTimerDuration: controller.duration!,
+                              mode: CupertinoTimerPickerMode.ms,
+                              initialTimerDuration: Duration(
+                                minutes: timeFormat == "Main"
+                                    ? widget.timerSettings.mainMinute
+                                    : widget.timerSettings.breakMinute,
+                                seconds: timeFormat == "Main"
+                                    ? widget.timerSettings.mainSecond
+                                    : widget.timerSettings.breakSecond,
+                              ),
                               onTimerDurationChanged: (time) {
                                 setState(() {
+                                  if (timeFormat == "Main") {
+                                    // Update the timer settings based on timeFormat
+                                    widget.timerSettings.mainMinute =
+                                        time.inMinutes;
+                                    widget.timerSettings.mainSecond =
+                                        time.inSeconds % 60;
+                                  } else {
+                                    widget.timerSettings.breakMinute =
+                                        time.inMinutes;
+                                    widget.timerSettings.breakSecond =
+                                        time.inSeconds % 60;
+                                  }
+                                  userInputtedDuration = time;
                                   controller.duration = time;
                                 });
                               },
@@ -323,7 +355,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                       }
                     }
                     setState(() {
-                      isPlaying = !isPlaying;
+                      isPlaying = true;
                     });
                   },
                   child: RoundButton(
@@ -337,7 +369,14 @@ class _PomodorTimerState extends State<PomodorTimer>
                 GestureDetector(
                   onTap: () {
                     if (userInputtedDuration == Duration.zero) {
-                      resetTimerDuration(initialDuration);
+                      resetTimerDuration(Duration(
+                        minutes: isMainTimer
+                            ? widget.timerSettings.mainMinute
+                            : widget.timerSettings.breakMinute,
+                        seconds: isMainTimer
+                            ? widget.timerSettings.mainSecond
+                            : widget.timerSettings.breakSecond,
+                      ));
                     } else {
                       resetTimerDuration(userInputtedDuration);
                     }
