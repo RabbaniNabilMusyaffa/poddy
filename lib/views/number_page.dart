@@ -133,7 +133,7 @@ class _NumberPageState extends State<NumberPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                        "Silahkan atur timer anda ${(timeFormat == "Main" ? mainMinute : breakMinute).toString().padLeft(2, '0')}:${(timeFormat == "Main" ? mainSecond : breakSecond).toString().padLeft(2, "0")} untuk timer $timeFormat",
+                        "Silahkan atur timer anda ${(timeFormat == "Main" ? mainMinute : breakMinute).toString().padLeft(2, '0')}:${(timeFormat == "Main" ? mainSecond : breakSecond).toString().padLeft(2, "0")} untuk $timeFormat Session",
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
@@ -281,8 +281,8 @@ class _NumberPageState extends State<NumberPage> {
           floatingActionButton: ElevatedButton(
             onPressed: () {
               if (timerSettings.mainMinute == 0 &&
-                  timerSettings.mainSecond == 0 &&
-                  timerSettings.breakMinute == 0 ||
+                      timerSettings.mainSecond == 0 &&
+                      timerSettings.breakMinute == 0 ||
                   timerSettings.breakSecond == 0) {
                 // Show an error message to the user indicating that they must input the timer values
                 showDialog(

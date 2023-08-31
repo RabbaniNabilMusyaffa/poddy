@@ -109,6 +109,8 @@ class _PomodorTimerState extends State<PomodorTimer>
         });
       }
     });
+
+    String timeFormat = "Main"; // Initial value
   }
 
   @override
@@ -297,7 +299,7 @@ class _PomodorTimerState extends State<PomodorTimer>
                   Padding(
                     padding: const EdgeInsets.only(top: 100),
                     child: Text(
-                      'session',
+                      '$timeFormat session',
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.75),
                         fontSize: 20,

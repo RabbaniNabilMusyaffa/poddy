@@ -14,8 +14,9 @@ class NavBar extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
+                Padding(padding: EdgeInsets.only(top: 50)),
                 ListTile(
-                  contentPadding: EdgeInsets.only(left: 30, top: 50),
+                  contentPadding: EdgeInsets.only(left: 30),
                   leading: Icon(
                     Icons.timer_outlined,
                     color: Colors.white,
