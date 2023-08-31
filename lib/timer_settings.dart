@@ -1,8 +1,8 @@
 class TimerSettings {
-  final int mainMinute;
-  final int mainSecond;
-  final int breakMinute;
-  final int breakSecond;
+  int mainMinute;
+  int mainSecond;
+  int breakMinute;
+  int breakSecond;
 
   TimerSettings({
     required this.mainMinute,

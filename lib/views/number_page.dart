@@ -280,15 +280,37 @@ class _NumberPageState extends State<NumberPage> {
           // Button Create timer
           floatingActionButton: ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PomodorTimer(
+              if (timerSettings.mainMinute == 0 &&
+                  timerSettings.mainSecond == 0 &&
+                  timerSettings.breakMinute == 0 ||
+                  timerSettings.breakSecond == 0) {
+                // Show an error message to the user indicating that they must input the timer values
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('Error'),
+                    content: Text('Silahkan input timer anda'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context); // Close the dialog
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PomodorTimer(
                       timerTitle: timerTitle,
-                      timerSettings:
-                          timerSettings), // Replace NewPage with your actual page widget
-                ),
-              );
+                      timerSettings: timerSettings,
+                    ),
+                  ),
+                );
+              }
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(

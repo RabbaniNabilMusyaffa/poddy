@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poddy_proto/timer_settings.dart';
+import 'package:poddy_proto/views/NavBar.dart';
+import 'package:poddy_proto/views/Setting_page.dart';
 import 'package:poddy_proto/views/number_page.dart';
 import 'package:poddy_proto/views/pomodor-timer.dart';
 
@@ -7,7 +9,9 @@ class Home extends StatelessWidget {
   final String timerTitle;
   final TimerSettings timerSettings;
 
-  const Home({
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Home({
     Key? key,
     required this.timerTitle,
     required this.timerSettings,
@@ -17,91 +21,52 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 24, 25, 34),
+      drawer: NavBar(),
+      endDrawer: SettingPage(),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 24, 25, 34),
         elevation: 0.0,
+        centerTitle: true,
+        actions: [
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: Icon(
+                  Icons.settings_rounded, // Change this to the desired icon
+                  size: 18,
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+              );
+            },
+          ),
+        ],
         title: Container(
-          width: 380,
-          height: 37,
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 4),
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: 20,
-                height: 40,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 16,
-                      height: 16,
-                      child: Stack(children: [
-                        Icon(
-                          Icons.table_rows_rounded,
-                          size: 18,
-                        ),
-                      ]),
-                    ),
-                  ],
+              Text(
+                'Poddy',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(width: 10),
-              Container(
-                width: 130,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Poddy',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '/ Poddy Dev',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.4000000059604645),
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(
+                width: 4,
               ),
-              const SizedBox(width: 10),
-              Container(
-                width: 20,
-                height: 40,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 16,
-                      height: 16,
-                      child: Stack(children: [
-                        Icon(
-                          Icons.settings_rounded,
-                          size: 18,
-                        ),
-                      ]),
-                    ),
-                  ],
+              Text(
+                '/ Poddy Dev',
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.4),
+                  fontSize: 14,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
